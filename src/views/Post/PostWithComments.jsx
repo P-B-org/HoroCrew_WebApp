@@ -15,6 +15,7 @@ import { commentSchema } from "../../utils/schemas/comment.schema";
 import { useFormik } from "formik";
 import { getCurrentUserLikes } from "../../services/LikeService";
 
+
 const initialValues = {
   body: "",
 };
@@ -25,6 +26,8 @@ export const PostWithComments = () => {
 
   const [postWithComments, setpostWithComments] = useState(null);
   const [currentUserLikes, setCurrentUserLikes] = useState([]);
+  const [deleteCommentId, setDeleteCommentId] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const { values, handleChange, handleSubmit, resetForm } = useFormik({
     initialValues: initialValues,
@@ -54,10 +57,12 @@ export const PostWithComments = () => {
     });
   };
 
-  const handleDelete = (commentId) => {
-    deleteComment(commentId)
+  const handleDelete = () => {
+    deleteComment(deleteCommentId)
       .then((res) => {
         handlePostWithComments();
+        setDeleteCommentId(null);
+        setShowDeleteModal(false);
       })
       .catch((err) => console.log(err));
   };
@@ -77,12 +82,8 @@ export const PostWithComments = () => {
 
     handleCurrentUserLikes();
   }, [postWithComments]);
-
   return (
-    <div
-      className="d-flex flex-column justify-content-center"
-      style={{ width: "100%" }}
-    >
+    <div className="d-flex flex-column justify-content-center" style={{ width: "100%" }}>
       {postWithComments ? (
         <div className="ms-3">
           <Posts
@@ -134,11 +135,26 @@ export const PostWithComments = () => {
                   userId={comment.user.id}
                   currentUser={currentUser.id}
                   deleteFn={() => {
-                    handleDelete(comment._id);
+                    setShowDeleteModal(true);
+                    console.log("true", setShowDeleteModal);
+                    setDeleteCommentId(comment._id);
                   }}
                 />
               ))}
             </div>
+
+            {showDeleteModal && (
+              <div className="modal" style={{ display: "block" }}>
+                <div className="modal-content" style={{ width: "50%", margin: "auto", backgroundColor: "white" }}>
+                  <p>Are you sure you want to delete this comment?</p>
+                  <div className="modal-buttons">
+                    <Buttons text="Cancel" onClick={() => setShowDeleteModal(false)} />
+                    <Buttons text="Delete" onClick={handleDelete} />
+                  </div>
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
       ) : (
@@ -146,4 +162,4 @@ export const PostWithComments = () => {
       )}
     </div>
   );
-};
+}
