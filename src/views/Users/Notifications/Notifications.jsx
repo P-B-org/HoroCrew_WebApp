@@ -64,7 +64,10 @@ export const Notifications = () => {
                           />
                         </Link>
                       </div>
-                      <div className="d-flex align-items-center justify-content-between flex-grow-1 ms-3">
+                      <div
+                        className="d-flex align-items-center justify-content-between flex-grow-1 ms-3"
+                        style={{ width: "50vw" }}
+                      >
                         <div className="d-flex flex-column">
                           {notification.read ? (
                             <p className="me-4 mb-0 p-0">

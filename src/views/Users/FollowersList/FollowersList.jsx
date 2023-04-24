@@ -1,4 +1,3 @@
-import { MDBCol, MDBContainer, MDBRow } from "mdb-react-ui-kit";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "../../../components/Skeletons/Card/Card";
@@ -27,25 +26,21 @@ export const FollowersList = () => {
       .catch((err) => console.error(err));
   }, [currentUser]);
   return (
-    <div className="min-vh-100 position-realtive">
+    <div className="min-vh-100 position-realtive d-flex flex-column justify-content-start align-items-center">
       <h1>Followers</h1>
       {!loading ? (
         currentUserFollowers.length > 0 ? (
-          <MDBContainer className="d-flex flex-column justify-content-start align-items-center">
-            <MDBRow>
-              <MDBCol>
-                {currentUserFollowers.map((follower) => (
-                  <UserBrief
-                    key={follower._id}
-                    img={follower.follower.image}
-                    user={follower.follower}
-                    text="View Profile"
-                    onClick={() => navigate(`/profile/${follower.follower.id}`)}
-                  />
-                ))}
-              </MDBCol>
-            </MDBRow>
-          </MDBContainer>
+          <div>
+            {currentUserFollowers.map((follower) => (
+              <UserBrief
+                key={follower._id}
+                img={follower.follower.image}
+                user={follower.follower}
+                text="View Profile"
+                onClick={() => navigate(`/profile/${follower.follower.id}`)}
+              />
+            ))}
+          </div>
         ) : (
           "No followers yet"
         )
