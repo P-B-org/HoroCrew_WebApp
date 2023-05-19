@@ -5,7 +5,7 @@ export const signUpSchema = Yup.object({
     lastName: Yup.string().required("Firstname Required!"),
     email: Yup.string().email("Email is invalid!").required("Email Required!"),
     password: Yup.string()
-        .min(8, "Password must be minimum 8 digits!")
+        .min(8, "Your password must have a minimum of 8 characters, at least one letter and one number")
         .required("Password Required!"),
     repeatPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "Password must match!")
