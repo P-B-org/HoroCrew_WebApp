@@ -48,6 +48,9 @@ const Login = () => {
       loginService({ email: values.email, password: values.password })
 
         .then(async (response) => {
+          login(response.accessToken);
+
+          console.log(currentUser);
 
           if (currentUser.facialId) {
             try {
