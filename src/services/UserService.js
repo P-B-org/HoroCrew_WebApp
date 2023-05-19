@@ -11,6 +11,7 @@ export const getEditCurrentUser = ({
   monthOfBirth,
   yearOfBirth,
   timeOfBirth,
+  facialId
 }) =>
   authenticatedHttp.patch("/users/me/edit", {
     firstName,
@@ -19,6 +20,7 @@ export const getEditCurrentUser = ({
     monthOfBirth,
     yearOfBirth,
     timeOfBirth,
+    facialId
   });
 
 export const getCurrentUser = () => authenticatedHttp.get("/users/me");
