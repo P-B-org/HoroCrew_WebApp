@@ -14,6 +14,7 @@ import { Notifications } from "./views/Users/Notifications/Notifications";
 import { NewPost } from "./views/Post/NewPost";
 import { FollowedsList } from "./views/Users/FollowedsList/FollowedsList";
 
+
 import { EditProfile } from "./components/Edit/EditProfile/EditProfile";
 
 import { MessageSection } from "./components/MessageSection/MessageSection";
@@ -49,6 +50,7 @@ function App() {
             </>
           }
         />
+
 
         {/* PROFILES */}
 
