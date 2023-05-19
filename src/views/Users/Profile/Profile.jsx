@@ -44,6 +44,8 @@ import { deleteCurrentUserAcc } from "../../../services/UserService";
 export const Profile = () => {
   const { currentUser } = useContext(AuthContext);
 
+  const faceio = new faceIO("fioa76d4");
+
   const navigate = useNavigate();
 
   const [currentUserFollowers, setCurrentUserFollowers] = useState([]);
@@ -90,6 +92,24 @@ export const Profile = () => {
         setCurrentUserLikes(likes);
       })
       .catch((err) => console.error(err));
+  };
+
+  const handleSignUp = async () => {
+    try {
+      console.log(currentUser);
+      let response = await faceio.enroll({
+        locale: "auto",
+        payload: {
+          email: currentUser.email,
+          whoami: currentUser.id,
+        },
+      });
+
+      console.log(` Unique Facial ID: ${response.facialId}
+  Enrollment Date: ${response.timestamp}`);
+    } catch (errCode) {
+      console.log(errCode);
+    }
   };
 
   const handleDeleteAccount = () => {
@@ -174,6 +194,21 @@ export const Profile = () => {
                               Profile
                             </NavLink>
                           </Dropdown.Item>
+
+                          <Dropdown.Item key="register">
+                            <Button
+                              auto
+                              onPress={() => {
+                                handleSignUp();
+                              }}
+                            >
+                              Enable FaceID
+                            </Button>
+
+
+                          </Dropdown.Item>
+
+
                           <Dropdown.Item key="logout">
                             <NavLink
                               className="text-decoration-none text-dark"

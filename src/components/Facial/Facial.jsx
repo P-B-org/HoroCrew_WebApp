@@ -1,7 +1,7 @@
 
-import { getEditCurrentUser as getEditCurrentUserFacial } from "../../services/UserService";
 import { useEffect } from "react";
-export const FacialIOBasic = () => {
+
+export const FacialRegister = () => {
     let faceio;
 
     useEffect(() => {
@@ -25,19 +25,6 @@ export const FacialIOBasic = () => {
         }
     };
 
-    const handleLogIn = async () => {
-        try {
-            let response = await faceio.authenticate({
-                locale: "auto",
-            });
-
-            console.log(` Unique Facial ID: ${response.facialId}
-          PayLoad: ${response.payload}
-          `);
-        } catch (error) {
-            handleError(errCode);
-        }
-    };
 
     const handleError = (errCode) => {
         switch (errCode) {
@@ -104,4 +91,21 @@ export const FacialIOBasic = () => {
                 break;
         }
     }
+    return (
+        <section >
+            <h1>
+                Face Register
+            </h1>
+            <div className="flex flex-col justify-center items-center">
+                <button
+
+                    onClick={handleSignUp}
+                >
+                    register
+                </button>
+
+            </div>
+        </section>
+    );
+
 }

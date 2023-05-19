@@ -20,11 +20,7 @@ const Login = () => {
 
   const { login, currentUser } = useContext(AuthContext);
 
-  let faceio;
-
-  useEffect(() => {
-    faceio = new faceIO("fioa76d4")
-  }, []);
+  const faceio = new faceIO("fioa76d4");
 
   if (currentUser) {
   }
@@ -48,24 +44,24 @@ const Login = () => {
       loginService({ email: values.email, password: values.password })
 
         .then(async (response) => {
-          login(response.accessToken);
+          login(response.accessToken, false);
 
           console.log(currentUser);
 
           if (currentUser.facialId) {
             try {
               let userData = await faceio.authenticate({
-                "locale": "auto",
+                locale: "auto",
 
               });
 
               console.log(` Unique Facial ID: ${userData.facialId}
-            PayLoad: ${userData.payload}
+              PayLoad: ${userData.payload}
             `);
 
 
               if (userData.facialId == currentUser.facialId) {
-                login(response.accessToken);
+                login(response.accessToken, true);
               }
             } catch (err) {
               console.log(err)
@@ -74,7 +70,7 @@ const Login = () => {
 
           else {
             console.log("login sin face ")
-            login(response.accessToken);
+            login(response.accessToken, true);
           }
 
 

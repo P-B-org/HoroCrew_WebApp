@@ -27,9 +27,11 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = useCallback(
-    (token) => {
+    (token, shouldNavigate) => {
       const navigateToProfile = () => {
-
+        if (shouldNavigate) {
+          navigate("/profile");
+        };
       };
       setAccessToken(token);
       getCurrentUser(navigateToProfile);
