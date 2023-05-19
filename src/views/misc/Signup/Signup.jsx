@@ -96,7 +96,7 @@ const FormSignUp = () => {
 
         <FormControl
           text="Email"
-          error={touched.lastName && errors.lastName}
+          error={touched.email && errors.email}
           htmlFor="email"
         >
           <Input

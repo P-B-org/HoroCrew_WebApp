@@ -138,10 +138,6 @@ const Login = () => {
           {" "}
           Back to Home{" "}
         </Link>
-        <Link className="btn btn-light m-3" to="/facial">
-          {" "}
-          Login With Facial{" "}
-        </Link>
 
       </form>
     </div>
