@@ -61,8 +61,11 @@ const Login = () => {
 
 
               if (userData.facialId == currentUser.facialId) {
+                console.log(userData.facialId);
+                console.log(currentUser.facialId);
                 login(response.accessToken, true);
               }
+
             } catch (err) {
               console.log(err)
             }

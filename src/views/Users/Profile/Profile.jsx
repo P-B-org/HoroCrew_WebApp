@@ -2,6 +2,8 @@ import React from "react";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
 import { logout as logoutToken } from "../../../stores/AccessTokenStore";
+import { getEditCurrentUser as editService } from "../../../services/UserService";
+
 
 import {
   MDBCol,
@@ -42,7 +44,8 @@ import { ProfileSk } from "../../../components/Skeletons/ProfileSk/ProfileSk";
 import { deleteCurrentUserAcc } from "../../../services/UserService";
 
 export const Profile = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, getCurrentUser } = useContext(AuthContext);
+
 
   const faceio = new faceIO("fioa76d4");
 
@@ -104,6 +107,32 @@ export const Profile = () => {
           whoami: currentUser.id,
         },
       });
+
+      const initialValues = {
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+        dayOfBirth: currentUser.dayOfBirth,
+        monthOfBirth: currentUser.monthOfBirth,
+        yearOfBirth: currentUser.yearOfBirth,
+        timeOfBirth: currentUser.timeOfBirth,
+        facialId: response.facialId
+      };
+
+      editService({
+        firstName: initialValues.firstName,
+        lastName: initialValues.lastName,
+        dayOfBirth: initialValues.dayOfBirth,
+        monthOfBirth: initialValues.monthOfBirth,
+        yearOfBirth: initialValues.yearOfBirth,
+        timeOfBirth: initialValues.timeOfBirth,
+        facialId: initialValues.facialId
+      })
+        .then((response) => {
+          console.log("success!!!")
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
 
       console.log(` Unique Facial ID: ${response.facialId}
   Enrollment Date: ${response.timestamp}`);
