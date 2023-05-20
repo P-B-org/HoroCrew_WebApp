@@ -4,9 +4,10 @@
     /* cursor: url(), auto; */
 
 }
+
 body {
     background-color: whitesmoke;
-} 
+}
 
 .profilBg {
     background: rgb(45, 92, 109);
@@ -44,5 +45,10 @@ body {
 
 .custom-file-input:active::before {
 
-    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+#faceio-modal {
+    z-index: 1000;
+    position: absolute;
 }

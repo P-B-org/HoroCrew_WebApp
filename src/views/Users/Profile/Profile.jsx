@@ -6,6 +6,7 @@ import { getEditCurrentUser as editService } from "../../../services/UserService
 import ReactDOM from "react-dom";
 
 
+
 import {
   MDBCol,
   MDBContainer,
@@ -69,6 +70,8 @@ export const Profile = () => {
     setVisible(false);
   };
 
+  const [modalVisible, setModalVisible] = useState(false);
+
   const handleDelete = (postId) => {
     deletePost(postId).then((res) => {
       handleCurrentUserPosts();
@@ -100,7 +103,8 @@ export const Profile = () => {
 
   const handleSignUp = async () => {
     try {
-      console.log(currentUser);
+      setModalVisible(true);
+
       let response = await faceio.enroll({
         locale: "auto",
         payload: {
@@ -116,27 +120,19 @@ export const Profile = () => {
         monthOfBirth: currentUser.monthOfBirth,
         yearOfBirth: currentUser.yearOfBirth,
         timeOfBirth: currentUser.timeOfBirth,
-        facialId: response.facialId
+        facialId: response.facialId,
       };
 
-      editService({
-        firstName: initialValues.firstName,
-        lastName: initialValues.lastName,
-        dayOfBirth: initialValues.dayOfBirth,
-        monthOfBirth: initialValues.monthOfBirth,
-        yearOfBirth: initialValues.yearOfBirth,
-        timeOfBirth: initialValues.timeOfBirth,
-        facialId: initialValues.facialId
-      })
+      editService(initialValues)
         .then((response) => {
-          console.log("success!!!")
+          console.log("success!!!");
         })
         .catch((error) => {
           console.log(error.response);
         });
 
       console.log(` Unique Facial ID: ${response.facialId}
-  Enrollment Date: ${response.timestamp}`);
+        Enrollment Date: ${response.timestamp}`);
     } catch (errCode) {
       console.log(errCode);
     }
@@ -219,13 +215,21 @@ export const Profile = () => {
                           <Dropdown.Item key="register">
                             <Button
                               auto
+                              onPress={handleSignUp}>
+                              Enable FaceID
+                            </Button>
+                          </Dropdown.Item>
+
+                          {/*  <Dropdown.Item key="register">
+                            <Button
+                              auto
                               onPress={() => {
                                 handleSignUp();
                               }}
                             >
                               Enable FaceID
                             </Button>
-                          </Dropdown.Item>
+                            </Dropdown.Item> */}
 
                           <Dropdown.Item key="edit">
                             <NavLink
@@ -236,13 +240,6 @@ export const Profile = () => {
                               Profile
                             </NavLink>
                           </Dropdown.Item>
-
-
-
-
-
-
-
                           <Dropdown.Item key="logout">
                             <NavLink
                               className="text-decoration-none text-dark"
@@ -304,6 +301,21 @@ export const Profile = () => {
                     </Button>
                   </Modal.Footer>
                 </Modal>
+
+                {modalVisible &&
+                  ReactDOM.createPortal(
+                    <Modal
+                      closeButton
+                      preventClose
+                      scroll
+                      aria-labelledby="modal-title"
+                      open={visible}
+                      onClose={closeHandler}
+                    >
+                      {/* ...modal content... */}
+                    </Modal>,
+                    document.body
+                  )}
 
                 <div className="py-4 text-black">
                   <div className="d-flex justify-content-end text-center py-1">
