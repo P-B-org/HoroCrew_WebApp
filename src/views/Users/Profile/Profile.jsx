@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
 import { logout as logoutToken } from "../../../stores/AccessTokenStore";
 import { getEditCurrentUser as editService } from "../../../services/UserService";
+import ReactDOM from "react-dom";
 
 
 import {
@@ -214,15 +215,6 @@ export const Profile = () => {
                           disallowEmptySelection
                           selectionMode="single"
                         >
-                          <Dropdown.Item key="edit">
-                            <NavLink
-                              className="text-decoration-none text-dark"
-                              to="/profile/edit-profile"
-                            >
-                              <i className="bi bi-pencil-square"></i> Edit
-                              Profile
-                            </NavLink>
-                          </Dropdown.Item>
 
                           <Dropdown.Item key="register">
                             <Button
@@ -233,9 +225,22 @@ export const Profile = () => {
                             >
                               Enable FaceID
                             </Button>
-
-
                           </Dropdown.Item>
+
+                          <Dropdown.Item key="edit">
+                            <NavLink
+                              className="text-decoration-none text-dark"
+                              to="/profile/edit-profile"
+                            >
+                              <i className="bi bi-pencil-square"></i> Edit
+                              Profile
+                            </NavLink>
+                          </Dropdown.Item>
+
+
+
+
+
 
 
                           <Dropdown.Item key="logout">
