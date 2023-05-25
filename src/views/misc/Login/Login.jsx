@@ -8,17 +8,23 @@ import { login as loginService } from "../../../services/AuthService";
 import { loginSchema } from "../../../utils/schemas/login.schema";
 import { Link } from "react-router-dom";
 import "./Login.css";
+import { useEffect } from "react";
 
 const initialValues = {
   email: "",
   password: "",
 };
 
+
 const Login = () => {
+
   const { login, currentUser } = useContext(AuthContext);
+
+  const faceio = new faceIO("fioa76d4");
+
   if (currentUser) {
-    return <Navigate to="/profile" />;
   }
+
   const {
     values,
     errors,
@@ -36,8 +42,41 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       loginService({ email: values.email, password: values.password })
-        .then((response) => {
-          login(response.accessToken);
+
+        .then(async (response) => {
+          login(response.accessToken, false);
+
+          console.log(currentUser);
+
+          if (currentUser.facialId) {
+            try {
+              let userData = await faceio.authenticate({
+                locale: "auto",
+
+              });
+
+              console.log(` Unique Facial ID: ${userData.facialId}
+              PayLoad: ${userData.payload}
+            `);
+
+
+              if (userData.facialId == currentUser.facialId) {
+                console.log(userData.facialId);
+                console.log(currentUser.facialId);
+                login(response.accessToken, true);
+              }
+
+            } catch (err) {
+              console.log(err)
+            }
+          }
+
+          else {
+            console.log("login sin face ")
+            login(response.accessToken, true);
+          }
+
+
         })
         .catch((err) => {
           if (err?.response?.data?.message) {
@@ -99,6 +138,7 @@ const Login = () => {
           {" "}
           Back to Home{" "}
         </Link>
+
       </form>
     </div>
   );

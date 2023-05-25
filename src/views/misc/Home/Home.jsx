@@ -132,17 +132,21 @@ export const Home = () => {
             <Grid.Container gap={2}>
               <Grid>
                 <Link href="/signup">
-                  <Button size="lg" color="success" auto ghost>
+                  <Button size="lg" bordered color="warning" auto>
                     Don't have an account? Join Us!
                   </Button>
+
+
                 </Link>
               </Grid>
 
               <Grid>
                 <Link href="/login">
-                  <Button size="lg" shadow auto>
+
+                  <Button size="lg" flat color="warning" auto>
                     Already have an account? Sign In!
                   </Button>
+
                 </Link>
               </Grid>
             </Grid.Container>

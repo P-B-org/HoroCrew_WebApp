@@ -14,10 +14,12 @@ import { Notifications } from "./views/Users/Notifications/Notifications";
 import { NewPost } from "./views/Post/NewPost";
 import { FollowedsList } from "./views/Users/FollowedsList/FollowedsList";
 
+
 import { EditProfile } from "./components/Edit/EditProfile/EditProfile";
 
 import { MessageSection } from "./components/MessageSection/MessageSection";
 import { PostWithComments } from "./views/Post/PostWithComments";
+import { FacialRegister } from "./components/Facial/Facial";
 
 function App() {
   const routesWithoutNav = ["/", "/signup", "/login"];
@@ -50,6 +52,7 @@ function App() {
           }
         />
 
+
         {/* PROFILES */}
 
         <Route
@@ -65,6 +68,14 @@ function App() {
           element={
             <ProtectedRoute>
               <EditProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile/facial-register"
+          element={
+            <ProtectedRoute>
+              <FacialRegister />
             </ProtectedRoute>
           }
         />

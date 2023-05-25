@@ -1,3 +1,7 @@
 .background-profile {
     background-image: url("https://images.unsplash.com/photo-1564801720666-83b2d7a3de73?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDZ8fHxlbnwwfHx8fA%3D%3D&w=1000&q=80");
 }
+
+#fioUiModal {
+    z-index: 10;
+}

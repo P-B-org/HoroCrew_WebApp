@@ -2,6 +2,10 @@ import React from "react";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
 import { logout as logoutToken } from "../../../stores/AccessTokenStore";
+import { getEditCurrentUser as editService } from "../../../services/UserService";
+import ReactDOM from "react-dom";
+
+
 
 import {
   MDBCol,
@@ -42,7 +46,10 @@ import { ProfileSk } from "../../../components/Skeletons/ProfileSk/ProfileSk";
 import { deleteCurrentUserAcc } from "../../../services/UserService";
 
 export const Profile = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, getCurrentUser } = useContext(AuthContext);
+
+
+  const faceio = new faceIO("fioa76d4");
 
   const navigate = useNavigate();
 
@@ -62,6 +69,8 @@ export const Profile = () => {
   const closeHandler = () => {
     setVisible(false);
   };
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleDelete = (postId) => {
     deletePost(postId).then((res) => {
@@ -90,6 +99,43 @@ export const Profile = () => {
         setCurrentUserLikes(likes);
       })
       .catch((err) => console.error(err));
+  };
+
+  const handleSignUp = async () => {
+    try {
+      setModalVisible(true);
+
+      let response = await faceio.enroll({
+        locale: "auto",
+        payload: {
+          email: currentUser.email,
+          whoami: currentUser.id,
+        },
+      });
+
+      const initialValues = {
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+        dayOfBirth: currentUser.dayOfBirth,
+        monthOfBirth: currentUser.monthOfBirth,
+        yearOfBirth: currentUser.yearOfBirth,
+        timeOfBirth: currentUser.timeOfBirth,
+        facialId: response.facialId,
+      };
+
+      editService(initialValues)
+        .then((response) => {
+          console.log("success!!!");
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+
+      console.log(` Unique Facial ID: ${response.facialId}
+        Enrollment Date: ${response.timestamp}`);
+    } catch (errCode) {
+      console.log(errCode);
+    }
   };
 
   const handleDeleteAccount = () => {
@@ -165,6 +211,26 @@ export const Profile = () => {
                           disallowEmptySelection
                           selectionMode="single"
                         >
+
+                          <Dropdown.Item key="register">
+                            <Button
+                              auto
+                              onPress={handleSignUp}>
+                              Enable FaceID
+                            </Button>
+                          </Dropdown.Item>
+
+                          {/*  <Dropdown.Item key="register">
+                            <Button
+                              auto
+                              onPress={() => {
+                                handleSignUp();
+                              }}
+                            >
+                              Enable FaceID
+                            </Button>
+                            </Dropdown.Item> */}
+
                           <Dropdown.Item key="edit">
                             <NavLink
                               className="text-decoration-none text-dark"
@@ -235,6 +301,21 @@ export const Profile = () => {
                     </Button>
                   </Modal.Footer>
                 </Modal>
+
+                {modalVisible &&
+                  ReactDOM.createPortal(
+                    <Modal
+                      closeButton
+                      preventClose
+                      scroll
+                      aria-labelledby="modal-title"
+                      open={visible}
+                      onClose={closeHandler}
+                    >
+                      {/* ...modal content... */}
+                    </Modal>,
+                    document.body
+                  )}
 
                 <div className="py-4 text-black">
                   <div className="d-flex justify-content-end text-center py-1">
