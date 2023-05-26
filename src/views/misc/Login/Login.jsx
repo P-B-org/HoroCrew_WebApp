@@ -44,11 +44,11 @@ const Login = () => {
       loginService({ email: values.email, password: values.password })
 
         .then(async (response) => {
-          login(response.accessToken, false);
+          await login(response.accessToken, false)
 
           console.log(currentUser);
 
-          if (currentUser && currentUser.facialId) {
+          if (currentUser.facialId) {
             try {
               let userData = await faceio.authenticate({
                 locale: "auto",
