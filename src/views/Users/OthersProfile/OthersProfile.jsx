@@ -139,7 +139,9 @@ export const OthersProfile = () => {
     >
       {user ? (
         <div className="py-3 mx-2 h-100 w-100">
-          <MDBContainer>
+          <MDBContainer style={{
+            paddingLeft: "10px",
+          }}>
             <MDBRow className="h-100 w-100">
               <MDBCol>
                 <MDBCard>
@@ -196,9 +198,9 @@ export const OthersProfile = () => {
                         {userFollowers.some(
                           (follower) => follower.follower.id === currentUser.id
                         ) &&
-                        userFolloweds.some(
-                          (followed) => followed.followed.id === currentUser.id
-                        ) ? (
+                          userFolloweds.some(
+                            (followed) => followed.followed.id === currentUser.id
+                          ) ? (
                           <div className="me-2">
                             <Tooltip
                               content={`chat with ${user.firstName}`}
@@ -282,7 +284,7 @@ export const OthersProfile = () => {
                 </div>
 
                 {showHoroscopeAstroCompatibility &&
-                horoscopeAstroCompatibility ? (
+                  horoscopeAstroCompatibility ? (
                   <Grid.Container gap={3} justify="center">
                     <Grid xs={12} sm={6} md={6} lg={6}>
                       <Card>
@@ -300,9 +302,9 @@ export const OthersProfile = () => {
                       {userFollowers.some(
                         (follower) => follower.follower.id === currentUser.id
                       ) &&
-                      userFolloweds.some(
-                        (followed) => followed.followed.id === currentUser.id
-                      ) ? (
+                        userFolloweds.some(
+                          (followed) => followed.followed.id === currentUser.id
+                        ) ? (
                         <Collapse.Group splitted>
                           <Collapse
                             subtitle={horoscopeAstroCompatibility[1].header}

@@ -176,7 +176,9 @@ export const Profile = () => {
     >
       {currentUser ? (
         <div className="py-3 mx-2 h-100">
-          <MDBContainer>
+          <MDBContainer style={{
+            paddingLeft: "10px",
+          }}>
             <MDBRow className="h-100">
               <MDBCol>
                 <MDBCard>
