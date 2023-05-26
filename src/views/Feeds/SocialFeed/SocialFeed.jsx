@@ -61,10 +61,11 @@ export const SocialFeed = () => {
 
   return (
     <div
-      className="scroll-bg min-vh-100 container-social"
-      style={{ maxWidth: "100vw", height: "100vh" }}
+      className="scroll-bg min-vh-100 min-vw-100 d-flex container"
+      style={{ maxWidth: "100vw", height: "100vh", textAlign: "center", alignItems: "center" }}
+
     >
-      <MDBContainer className=" d-flex flex-column justify-content-start align-items-center">
+      <MDBContainer className="container-social d-flex flex-column justify-content-start align-items-center">
         <div className="content-wrapper">
           <h1 className="mb-4">See what's happening!</h1>
           <SearchBar />

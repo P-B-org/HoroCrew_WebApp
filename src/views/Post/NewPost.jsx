@@ -7,6 +7,7 @@ import Input from "../../components/Input/Input";
 import { newPost } from "../../services/PostService";
 import { newPostSchema } from "../../utils/schemas/post.schema";
 
+
 const initialValues = {
   body: "",
   image: "",
@@ -47,7 +48,7 @@ export const NewPost = ({ refreshPosts }) => {
           resetForm({ values: "" });
         })
         .catch((err) => {
-          console.err(err);
+          console.error(err);
           setSubmitting(false);
         });
     },

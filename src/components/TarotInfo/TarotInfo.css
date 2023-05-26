@@ -1,4 +1,7 @@
 #tarot {
     z-index: 999;
     background-color: white;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
 }

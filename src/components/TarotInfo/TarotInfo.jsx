@@ -16,24 +16,25 @@ export const TarotInfo = ({ tarot }) => {
   const [image, setImage] = useState(back);
 
   return (
-    <div className="my-3">
-      <img
-        style={{ height: "300px" }}
-        src={image}
-        onClick={() => {
-          setImage(randomCard);
-        }}
-      />
-      <h3 className="mt-3">
-        {tarot.name} || {tarot.sequence}
-      </h3>
-      <div className="px-5">
-        <h6 className="mb-0">Description:</h6>
-        <p>{tarot.desc}</p>
-        <i className="bi bi-arrow-repeat"></i>
-        <h6 className="mb-0">Reverse description:</h6>
-        <p>{tarot.rdesc}</p>
-      </div>
-    </div>
+    <div className="tarot-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div className="my-3">
+        <img
+          style={{ height: "300px" }}
+          src={image}
+          onClick={() => {
+            setImage(randomCard);
+          }}
+        />
+        <h3 className="mt-3">
+          {tarot.name} || {tarot.sequence}
+        </h3>
+        <div className="px-5">
+          <h6 className="mb-0">Description:</h6>
+          <p>{tarot.desc}</p>
+          <i className="bi bi-arrow-repeat"></i>
+          <h6 className="mb-0">Reverse description:</h6>
+          <p>{tarot.rdesc}</p>
+        </div>
+      </div></div>
   );
 };

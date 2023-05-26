@@ -1,3 +1,4 @@
+import "./FormControl.css"
 const FormControl = ({ children, text, htmlFor, error }) => {
   return (
     <div className="FormControl mb-2">

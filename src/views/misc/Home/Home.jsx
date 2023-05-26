@@ -28,7 +28,7 @@ export const Home = () => {
 
           <Animator animation={batch(Sticky(), Fade(), MoveOut(0, -200))}>
             <img src={imgLogo} style={{ width: "60vh", height: "100%" }} />
-            <div class="scroll-down"></div>
+            <div className="scroll-down"></div>
           </Animator>
         </ScrollPage>
 

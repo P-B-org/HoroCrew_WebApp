@@ -3,35 +3,35 @@ import "./Card.css";
 
 export const Card = () => {
   return (
-    <div class="skeleton-container">
-      <div class="post">
-        <div class="avatar"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+    <div className="skeleton-container">
+      <div className="post">
+        <div className="avatar"></div>
+        <div className="line"></div>
+        <div className="line"></div>
       </div>
 
-      <div class="post">
-        <div class="avatar"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+      <div className="post">
+        <div className="avatar"></div>
+        <div className="line"></div>
+        <div className="line"></div>
       </div>
 
-      <div class="post">
-        <div class="avatar"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+      <div className="post">
+        <div className="avatar"></div>
+        <div className="line"></div>
+        <div className="line"></div>
       </div>
 
-      <div class="post">
-        <div class="avatar"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+      <div className="post">
+        <div className="avatar"></div>
+        <div className="line"></div>
+        <div className="line"></div>
       </div>
 
-      <div class="post">
-        <div class="avatar"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+      <div className="post">
+        <div className="avatar"></div>
+        <div className="line"></div>
+        <div className="line"></div>
       </div>
     </div>
   );
