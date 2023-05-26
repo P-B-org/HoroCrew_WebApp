@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { getAllUsers as getAllUsersService } from "../../services/UserService";
 import { Link } from "react-router-dom";
-
+import "./SearchBar.css"
 export const SearchBar = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
@@ -17,8 +17,8 @@ export const SearchBar = () => {
 
   const filteredUsers = search
     ? users.filter((user) =>
-        user.firstName.toLowerCase().includes(search.toLowerCase())
-      )
+      user.firstName.toLowerCase().includes(search.toLowerCase())
+    )
     : [];
 
   const handleSearchChange = (event) => {

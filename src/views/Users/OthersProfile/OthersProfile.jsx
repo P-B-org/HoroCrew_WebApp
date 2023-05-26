@@ -140,7 +140,7 @@ export const OthersProfile = () => {
       {user ? (
         <div className="py-3 mx-2 h-100 w-100">
           <MDBContainer style={{
-            paddingLeft: "10px",
+            paddingLeft: "5px",
           }}>
             <MDBRow className="h-100 w-100">
               <MDBCol>

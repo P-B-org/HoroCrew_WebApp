@@ -76,7 +76,7 @@ export const SocialFeed = () => {
               }}
             />
             <MDBCol>
-              <div style={{ maxWidth: "95vw" }}>
+              <div style={{ maxWidth: "95vw", marginLeft: "5px", marginRight: "5px" }}>
                 {!loading ? (
                   posts.map((post) => (
                     <Posts
