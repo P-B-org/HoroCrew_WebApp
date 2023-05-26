@@ -48,7 +48,7 @@ const Login = () => {
 
           console.log(currentUser);
 
-          if (currentUser.facialId) {
+          if (currentUser && currentUser.facialId) {
             try {
               let userData = await faceio.authenticate({
                 locale: "auto",
@@ -60,7 +60,7 @@ const Login = () => {
             `);
 
 
-              if (userData.facialId == currentUser.facialId) {
+              if (userData.facialId === currentUser.facialId) {
                 console.log(userData.facialId);
                 console.log(currentUser.facialId);
                 login(response.accessToken, true);
