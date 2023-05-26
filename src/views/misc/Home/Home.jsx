@@ -144,7 +144,7 @@ export const Home = () => {
                 <Link href="/login">
 
                   <Button size="lg" flat color="warning" auto>
-                    Already have an account? Sign In!
+                    Already have one? Click & Sign In!
                   </Button>
 
                 </Link>
